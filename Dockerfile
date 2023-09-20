@@ -1,5 +1,6 @@
 # See CKAN docs on installation from Docker Compose on usage
-FROM debian:jessie
+# FROM debian:jessie
+FROM debian:buster
 MAINTAINER Open Knowledge
 
 # Install required system packages
