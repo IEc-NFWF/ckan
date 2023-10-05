@@ -45,3 +45,6 @@ node_modules/
 
 # docker
 contrib/docker/.env
+
+# nfwf extensions repo
+contrib/nfwf-ckan-extensions
