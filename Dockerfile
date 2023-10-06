@@ -54,7 +54,9 @@ RUN ckan-pip install -U 'pip<21' && \
     chmod +x /ckan-entrypoint.sh && \
     chown -R ckan:ckan $CKAN_HOME $CKAN_VENV $CKAN_CONFIG $CKAN_STORAGE_PATH && \
     ckan-pip install ckanext-oauth2 && \
-    ckan-pip install ckanext-envvars 
+    ckan-pip install ckanext-envvars && \ 
+    ckan-pip install -e $CKAN_VENV/src/ckan/contrib/nfwf-ckan-extensions/ckanext-nfwf_fields/ && \
+    ckan-pip install -e $CKAN_VENV/src/ckan/contrib/nfwf-ckan-extensions/ckanext-nfwf_theme/
 
 ENTRYPOINT ["/ckan-entrypoint.sh"]
 
