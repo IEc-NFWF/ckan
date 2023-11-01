@@ -1,11 +1,17 @@
 # See CKAN docs on installation from Docker Compose on usage
-# FROM debian:jessie
 FROM debian:buster
 MAINTAINER Open Knowledge
 
+# Upgrade apt to use HTTPS
+RUN echo 'Acquire::https::Verify-Peer "false";' > /etc/apt/apt.conf.d/99_tmp_ssl-verify-off.conf \
+    && sed --in-place=.orig --regexp-extended 's%http://(.*archive|security).ubuntu.com%https://mirrors.edge.kernel.org%g' /etc/apt/sources.list \
+    && apt-get -q -y update \
+    && apt-get -q -y install ca-certificates \
+    && rm /etc/apt/apt.conf.d/99_tmp_ssl-verify-off.conf
+
 # Install required system packages
 RUN apt-get -q -y update \
-    && DEBIAN_FRONTEND=noninteractive apt-get -q -y upgrade \
+    && apt-get -q -y upgrade \
     && apt-get -q -y install \
         python-dev \
         python-pip \
